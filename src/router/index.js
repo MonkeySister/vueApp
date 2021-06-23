@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import About from '@/views/About'
 
 Vue.use(VueRouter)
@@ -13,7 +12,7 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home,
+        component: import ('@/views/Home.vue'),
         meta: {
             cache: true
         }
@@ -25,11 +24,20 @@ const routes = [
         meta: {
             cache: true
         }
-    }
+    },
+    {
+        path: '/Map',
+        name: 'Map',
+        component: import ('@/views/plugIn/baiduMap/index'),
+        meta: {
+            cache: true
+        }
+    },
 ]
 
 const router = new VueRouter({
-    routes
+    routes,
+    mode: 'history'
 })
 
 export default router

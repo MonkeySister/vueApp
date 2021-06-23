@@ -21,7 +21,7 @@
     <button @click="show=true">测试</button>
     <div class="list"
          :class="{'list-show':show?true:false}">哈哈哈</div>
-    <div id="map"></div>
+    <button @click="$router.push('/Map')">百度地图插件的使用</button>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ import { mapState } from 'vuex'
 import Loading from "@/components/Loading"
 import { setInterval } from 'timers'
 
-import BMap from 'BMap'
+
 export default {
   name: 'Home',
   components: {
@@ -49,36 +49,36 @@ export default {
   },
   mounted () {
 
-    this.$nextTick(() => {
-      this.$driver.defineSteps([
-        {
-          element: '#first-element-introduction',
-          popover: {
-            className: 'first-step-popover-class',
-            title: 'Title on Popover',
-            description: 'Body of the popover',
-            position: 'bottom'
-          }
-        },
-        {
-          element: '#second-element-introduction',
-          popover: {
-            title: 'Title on Popover',
-            description: 'Body of the popover',
-            position: 'bottom'
-          }
-        },
-        {
-          element: '#third-element-introduction',
-          popover: {
-            title: 'Title on Popover',
-            description: 'Body of the popover',
-            position: 'right'
-          }
-        },
-      ]);
-      this.$driver.start();
-    })
+    // this.$nextTick(() => {
+    //   this.$driver.defineSteps([
+    //     {
+    //       element: '#first-element-introduction',
+    //       popover: {
+    //         className: 'first-step-popover-class',
+    //         title: 'Title on Popover',
+    //         description: 'Body of the popover',
+    //         position: 'bottom'
+    //       }
+    //     },
+    //     {
+    //       element: '#second-element-introduction',
+    //       popover: {
+    //         title: 'Title on Popover',
+    //         description: 'Body of the popover',
+    //         position: 'bottom'
+    //       }
+    //     },
+    //     {
+    //       element: '#third-element-introduction',
+    //       popover: {
+    //         title: 'Title on Popover',
+    //         description: 'Body of the popover',
+    //         position: 'right'
+    //       }
+    //     },
+    //   ]);
+    //   this.$driver.start();
+    // })
 
   },
   created () {
@@ -90,8 +90,8 @@ export default {
 
   methods: {
     gettoken (type) {
-      // this.$store.commit('setTokeen')
-      // console.log(this.$store.state.token)
+      this.$store.commit('setTokeen')
+      console.log(this.$store.state.token)
     },
     getCode () {
       this.disabled = true
@@ -109,19 +109,7 @@ export default {
       }, 1000)
     },
 
-    initMap () {
-      var map = new BMap.Map("map")
-      // 初始化地图,设置中心点坐标和地图级别
-      map.centerAndZoom(new BMap.Point(116.404, 39.915), 11)
-      //添加地图类型控件
-      map.addControl(new BMap.MapTypeControl({
-        mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
-      }))
-      // 设置地图显示的城市 此项是必须设置的
-      map.setCurrentCity("北京")
-      //开启鼠标滚轮缩放
-      map.enableScrollWheelZoom(true)
-    },
+
 
     text () {
       this.$driver.resetPassive()
@@ -140,10 +128,5 @@ export default {
   transition: height 5s;
   transition-timing-function: ease-in;
   transition-delay: 0.5s;
-}
-
-#map {
-  width: 600px;
-  height: 600px;
 }
 </style>
