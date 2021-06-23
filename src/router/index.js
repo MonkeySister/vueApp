@@ -14,7 +14,7 @@ const routes = [
         name: 'Home',
         component: import ('@/views/Home.vue'),
         meta: {
-            cache: true
+            cache: false
         }
     },
     {

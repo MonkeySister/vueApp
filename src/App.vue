@@ -4,7 +4,6 @@
       <router-view />
     </keep-alive>
     <router-view v-else />
-
   </div>
 </template>
 
