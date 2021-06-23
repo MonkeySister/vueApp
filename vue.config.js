@@ -1,5 +1,8 @@
+const path = require('path')
+
 //全局cli配置
 module.exports = {
+
     /* //部署应用包时的基本url，默认应用部署在一个域名的根路径上，
     如果部署在子路径上就需要指定这个子路径，eg:'/my-web/',这个值也可以被设置成''，或者相对路径'./',
     这样打出来的包可以被部署在任意路径。
@@ -41,20 +44,20 @@ module.exports = {
     integrity: false,
     /* webpack简单的配置，可以是对象也可以是函数 */
     configureWebpack: config => {
+        config.externals = {
+            "BMap": "BMap"
+        }
         if (process.env.NODE_ENV === 'production') {
             config.mode = 'production'
-            config.externals = {
-                // cdn引入到index.html后在这里配置免于打包相应的插件
-                // 'vue': 'Vue',
-            }
         } else {
             config.mode = 'development'
         }
+
     },
     // 是一个函数，会接收一个基于 webpack-chain 的 ChainableConfig 实例。允许对内部的 webpack 配置进行更细粒度的修改。
     chainWebpack: () => {},
     css: {
-        requireModuleExtension: true,
+        requireModuleExtension: false,
         extract: false, //是否单独提取css文件
         sourceMap: false, //是否打包css map 文件
         // loaderOptions: {
@@ -65,7 +68,6 @@ module.exports = {
         //         // 这里的选项会传递给 postcss-loader
         //     }
         // },
-        modules: false
     },
     devServer: {
         // 如果你的前端应用和后端 API 服务器没有运行在同一个主机上，你需要在开发环境下将 API 请求代理到 API 服务器。

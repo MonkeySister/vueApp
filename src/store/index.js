@@ -8,7 +8,8 @@ import user from './module/user'
 export default new Vuex.Store({
     state: {},
     getters: {
-        access: state => state.user.access
+        token: state => state.user.token,
+        loginTime: state => state.user.loginTime
     },
     mutations: {},
     actions: {},

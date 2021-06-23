@@ -6,6 +6,15 @@ export default {
   name: 'Loading',
   data () {
     return {}
+  },
+  created () {
+  },
+  activated () {
+  },
+  methods: {
+    text (type) {
+      console.log(type)
+    }
   }
 }
 </script>
