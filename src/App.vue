@@ -18,7 +18,7 @@
 
 #nav {
   padding: 30px;
-
+font-size:20px;
   a {
     font-weight: bold;
     color: #2c3e50;
