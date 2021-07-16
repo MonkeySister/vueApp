@@ -1,24 +1,24 @@
 //component中的组件自动全局注册
-import Vue from 'vue'
+import Vue from "vue"
+import upperFirst from "lodash/upperFirst"
+import camelCase from "lodash/camelCase"
 
+const requireComponent = require.context("./", false, /\.vue$/)
 
-const changeStr = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1)
-}
+requireComponent.keys().forEach((fileName) => {
+  // 获取组件配置
+  const componentConfig = requireComponent(fileName)
 
-const requireComponent = require.context('./', false, /\.vue$/)
+  // 获取组件的 PascalCase 命名
+  const componentName = upperFirst(
+    camelCase(
+      fileName
+        .split("/")
+        .pop()
+        .replace(/\.\w+$/, "")
+    )
+  )
 
-const installComponent = () => {
-    requireComponent.keys().forEach(fileName => {
-        let config = requireComponent(fileName)
-        console.log(config) // ./child1.vue 然后用正则拿到child1
-        let componentName = changeStr(
-            fileName.replace(/^\.\//, '').replace(/\.\w+$/, '')
-        )
-        Vue.component(componentName, config.default || config)
-    })
-}
-
-export default {
-    installComponent
-}
+  // 全局注册组件
+  Vue.component(componentName, componentConfig.default || componentConfig)
+})
