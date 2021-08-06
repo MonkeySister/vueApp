@@ -13,13 +13,8 @@ import "@/components/iviewComponents.js"
 import "./assets/less/iview.less"
 import "./assets/less/index.less"
 
-// import ViewUI from 'view-design';
-// Vue.use(ViewUI, {
-//     transfer: true,
-//     size: 'large',
-//     capture: false,
-//     select: {}
-// });
+//全局挂载自定义指令来检测权限
+import "./permission/index"
 
 new Vue({
   router,

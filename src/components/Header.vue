@@ -4,32 +4,19 @@
       type="flex"
       align="middle"
       justify="space-between">
-      <Avatar shape="square"
-        icon="ios-person"
-        size="large" />
+      <slot>
+        <Avatar shape="square"
+          icon="ios-person"
+          size="large" />
+      </slot>
+
       <Row class="menu"
         align="middle"
         :class="{showMenu:showMenu,hideMenu:!showMenu}">
-        <!-- <div class="menuTop">
-          <Avatar shape="square"
-            icon="ios-person"
-            size="large" />
-          <Icon type="ios-apps"
-            size="24"
-            class="menuIcon"
-            @click="showMenu = !showMenu" />
-        </div> -->
         <Col class="menuItem"
           v-for="(list ,i) in menuList"
-          :key="i">{{list.label}}</Col>
+          :key="i"><span @click="$router.push(list.value)">{{list.label}}</span></Col>
       </Row>
-
-      <transition name="fade">
-        <Icon type="ios-apps"
-          size="24"
-          class="menuIcon"
-          @click="showMenu = !showMenu" />
-      </transition>
 
     </Row>
   </div>
@@ -42,15 +29,15 @@ export default {
       menuList: [
         {
           label: 'JavaScript',
-          value: '/js'
+          value: '/js',
         },
         {
           label: 'Html',
           value: '/html'
         },
         {
-          label: 'Vue',
-          value: '/js'
+          label: 'vuePages',
+          value: '/vuePages'
         },
         {
           label: 'Css',
@@ -59,21 +46,25 @@ export default {
       ],
       showMenu: false
     }
+  },
+
+  methods: {
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .header {
-  width: 100vw;
-  height: 67px;
+  width: 100%;
+  height: 60px;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(1px);
-  color: #fff;
   box-shadow: 0 5px 10px 0 rgba(255, 255, 255, 0.3);
+  position: fixed;
 }
 .headerCon {
-  width: 1200px;
+  width: 100%;
+  padding: 0 4%;
   height: 100%;
   margin: 0 auto;
   position: relative;

@@ -20,6 +20,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.home {
+  height: 100%;
+}
 .header {
   display: flex;
   align-items: center;
