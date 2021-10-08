@@ -13,6 +13,10 @@ import "@/components/iviewComponents.js"
 import "./assets/less/iview.less"
 import "./assets/less/index.less"
 
+import ElementUI from "element-ui"
+import "element-ui/lib/theme-chalk/index.css"
+Vue.use(ElementUI)
+
 //全局挂载自定义指令来检测权限
 import "./permission/index"
 

@@ -1,4 +1,3 @@
-// import Vue from "@/views/vue/index.vue"
 export default [
   {
     path: "/vuePages",

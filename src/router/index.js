@@ -1,15 +1,22 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
+import store from "@/store"
+import { Modal, Message } from "view-design"
 
-const originalPush = VueRouter.prototype.push
-
-VueRouter.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch((err) => err)
-}
+// const originalPush = VueRouter.prototype.push
+// VueRouter.prototype.push = function push(location) {
+//   return originalPush.call(this, location).catch((err) => err)
+// }
 
 Vue.use(VueRouter)
 
-import vuePages from "./vuePages"
+// 自动化路由注册
+const requiredRoutes = require.context(".", false, /.js$/)
+const getRoutes = []
+requiredRoutes.keys().forEach((key) => {
+  if (key === "./index.js") return
+  getRoutes.unshift(requiredRoutes(key).default[0])
+})
 
 const baseRoutes = [
   {
@@ -19,7 +26,7 @@ const baseRoutes = [
   },
 ]
 
-let routes = [...new Set([...baseRoutes, ...vuePages])]
+let routes = [...new Set([...baseRoutes, ...getRoutes])]
 
 const router = new VueRouter({
   mode: "history",
@@ -28,7 +35,16 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  next()
+  if (!store.getters.token && to.name != "login") {
+    Message.error({
+      content: "登陆过期,请重新登陆！！",
+    })
+    next({
+      name: "login",
+    })
+  } else {
+    next()
+  }
 })
 
 export default router

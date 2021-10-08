@@ -1,7 +1,12 @@
 export default {
   state: {
+    token: localStorage.getItem("token") || "",
     accessList: localStorage.getItem("accessList") || [],
   },
-  mutations: {},
+  mutations: {
+    setToken(state, token) {
+      state.token = token
+    },
+  },
   actions: {},
 }

@@ -18,6 +18,9 @@
           :key="i"><span @click="$router.push(list.value)">{{list.label}}</span></Col>
       </Row>
 
+      <Button type="info"
+        @click="signOut">退出登陆</Button>
+
     </Row>
   </div>
 </template>
@@ -29,7 +32,7 @@ export default {
       menuList: [
         {
           label: 'JavaScript',
-          value: '/js',
+          value: '/jsPages',
         },
         {
           label: 'Html',
@@ -49,6 +52,10 @@ export default {
   },
 
   methods: {
+    signOut() {
+      localStorage.clear()
+      this.$router.push('/login')
+    }
   }
 }
 </script>

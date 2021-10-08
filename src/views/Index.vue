@@ -1,11 +1,14 @@
 <template>
   <div class="pages home">
     <Header></Header>
+    <Button type="info"
+      @click="getUserInfo()"
+      style="margin-top:100px">获取用户信息</Button>
   </div>
 
 </template>
 <script>
-
+import { userInfo } from '@/api/user.js'
 export default {
   name: 'Index',
   components: {
@@ -16,6 +19,13 @@ export default {
     }
   },
   created() {
+  },
+  methods: {
+    getUserInfo() {
+      userInfo({ brandId: 1 }).then(res => {
+        console.log(res);
+      })
+    }
   }
 }
 </script>
